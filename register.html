@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provisioning | Triple Edge AI</title>
+    <link rel="icon" type="image/png" href="logo_final.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      .input-wrapper {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+      .input-icon {
+        position: absolute;
+        left: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        width: 20px;
+        height: 20px;
+        transition: color 0.3s;
+      }
+      .form-input:focus + .input-icon {
+        color: var(--secondary);
+      }
+      .error-alert {
+        background: rgba(244, 63, 94, 0.1);
+        border: 1px solid rgba(244, 63, 94, 0.2);
+        color: var(--accent);
+        padding: 1rem 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .auth-tabs {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        border-bottom: 1px solid var(--glass-border);
+        padding-bottom: 1rem;
+      }
+      .auth-tab {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        position: relative;
+      }
+      .auth-tab.active {
+        color: #fff;
+      }
+      .auth-tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1rem;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--secondary);
+        box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+      }
+    </style>
+  </head>
+  <body class="auth-wrapper">
+    <div class="auth-card glass-card" style="border-color: rgba(192, 132, 252, 0.2);">
+      <div style="text-align: center; margin-bottom: 3.5rem">
+        <img src="logo_final.png" alt="Triple Edge AI" style="height: 70px; border-radius: 18px; margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h2 style="font-size: 2.4rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;">Digital Onboarding</h2>
+        <p style="color: var(--text-muted); font-size: 1rem; margin-top: 0.5rem;">Join the autonomous ecosystem</p>
+      </div>
+
+      <div class="auth-tabs">
+        <a href="/login" class="auth-tab">Identity Link</a>
+        <a href="/register" class="auth-tab active">Provisioning</a>
+      </div>
+
+      {% if error %}
+      <div class="error-alert">
+        <i data-lucide="shield-alert"></i>
+        {{ error }}
+      </div>
+      {% endif %}
+
+      <form action="/register" method="POST">
+        <div class="input-wrapper">
+          <i data-lucide="user-plus" class="input-icon"></i>
+          <input type="text" name="username" class="form-input" placeholder="Choose Identifier" required autocomplete="username">
+        </div>
+
+        <div class="input-wrapper">
+          <i data-lucide="shield-check" class="input-icon"></i>
+          <input type="password" name="password" class="form-input" placeholder="Create Secret Key" required autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="btn-chrome" style="width: 100%; justify-content: center; margin-top: 1rem; background: linear-gradient(135deg, var(--secondary), var(--accent));">
+          <i data-lucide="sparkles"></i>
+          Initialize Identity
+        </button>
+      </form>
+
+      <div style="margin-top: 2.5rem; text-align: center; color: var(--text-muted); font-size: 0.95rem;">
+        Existing operative? <a href="/login" style="color: var(--secondary); font-weight: 600; text-decoration: none;">Resume session</a>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
