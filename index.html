@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Triple Edge AI | Enterprise Assessment Engine</title>
+    <link rel="icon" type="image/png" href="logo_final.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo-container">
+          <div class="logo-wrapper">
+            <img src="logo_final.png" alt="Triple Edge AI" />
+            <div class="status-indicator"></div>
+          </div>
+          <div>
+            <h1>Triple Edge <span>AI</span></h1>
+            <p class="brand-subtitle">Autonomous Knowledge Engine</p>
+          </div>
+        </div>
+          <div id="user-badge" class="user-profile-badge glass-card" style="display: flex; align-items: center; gap: 1rem; padding: 0.5rem 1rem; border-radius: 100px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            <div class="user-avatar" style="width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--primary-glow);">
+              <i data-lucide="user" style="color: white; width: 22px; height: 22px"></i>
+            </div>
+            <div style="text-align: left; line-height: 1.2">
+              <p id="username-display" style="color: white; margin-bottom: 2px; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.3px;">{{ username }}</p>
+              <a href="/logout" style="color: var(--text-muted); text-decoration: none; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; display: flex; align-items: center; gap: 4px; transition: all 0.2s;" onmouseover="this.style.color='var(--error)'" onmouseout="this.style.color='var(--text-muted)'">
+                <i data-lucide="power" style="width: 10px; height: 10px"></i>
+                Sign Out
+              </a>
+            </div>
+          </div>
+      </header>
+
+      <main>
+        
+
+
+        <section class="input-section glass-card">
+          <div class="input-container">
+            <label class="input-label">
+              <i data-lucide="layout-grid"></i>
+              Select Knowledge Dimension
+            </label>
+
+            <div class="knowledge-grid">
+              <div class="source-card" data-value="mars">
+                <i data-lucide="rocket"></i>
+                <span>Mars Mission</span>
+              </div>
+              <div class="source-card" data-value="humanoid">
+                <i data-lucide="bot"></i>
+                <span>Robot AI</span>
+              </div>
+              <div class="source-card" data-value="neuralink">
+                <i data-lucide="brain-circuit"></i>
+                <span>Neuralink</span>
+              </div>
+              <div class="source-card" data-value="meta_economy">
+                <i data-lucide="coins"></i>
+                <span>Meta Economy</span>
+              </div>
+              <div class="source-card" data-value="biotech">
+                <i data-lucide="dna"></i>
+                <span>BioTech</span>
+              </div>
+              <div class="source-card" data-value="agentic_web">
+                <i data-lucide="network"></i>
+                <span>Web 4.0</span>
+              </div>
+              <div class="source-card" data-value="other" style="border-style: dashed; background: rgba(255, 255, 255, 0.01);">
+                <i data-lucide="plus-circle" style="color: var(--text-muted)"></i>
+                <span>Custom Source</span>
+              </div>
+            </div>
+
+            <select id="topicSelect" style="display: none">
+              <option value="" disabled selected>Choose a Topic...</option>
+              <option value="mars">Mars</option>
+              <option value="humanoid">Humanoid</option>
+              <option value="neuralink">Neuralink</option>
+              <option value="meta_economy">Metaverse</option>
+              <option value="biotech">Biotech</option>
+              <option value="agentic_web">Agentic Web</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div id="customInputWrapper" style="display: none;">
+            <textarea id="sourceText" placeholder="Paste comprehensive knowledge text here..."></textarea>
+            <button id="voiceInputBtn" onclick="startVoiceInput()" title="Voice Synthesis" 
+                    style="position: absolute; bottom: 30px; right: 30px; background: var(--primary); border: none; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; box-shadow: 0 10px 20px var(--primary-glow);">
+              <i data-lucide="mic"></i>
+            </button>
+          </div>
+
+          <!-- Control Bar -->
+          <div class="control-bar" style="display: flex; align-items: stretch; justify-content: center; gap: 1rem; margin-top: 3rem; flex-wrap: wrap;">
+              
+              <!-- Question Count Module -->
+              <div class="glass-card" style="padding: 0; display: flex; align-items: center; border-radius: 16px; overflow: hidden; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.2);">
+                  <div style="padding: 0 1rem; display: flex; align-items: center; gap: 0.5rem; border-right: 1px solid var(--glass-border); height: 100%; background: rgba(255,255,255,0.02);">
+                      <i data-lucide="list-ordered" style="width: 18px; color: var(--secondary);"></i>
+                      <span style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Count</span>
+                  </div>
+                  <input type="number" id="questionCount" value="5" min="1" max="100" 
+                         style="width: 70px; height: 55px; background: transparent; border: none; color: #fff; font-size: 1.2rem; font-weight: 800; text-align: center; outline: none; -moz-appearance: textfield;">
+              </div>
+
+              <!-- Action Button -->
+              <button id="extractBtn" class="btn-chrome" style="margin: 0; height: 57px; padding: 0 2.5rem; font-size: 1.1rem;">
+                <i data-lucide="zap" style="width: 20px; height: 20px;"></i>
+                Initiate Autonomous Extraction
+              </button>
+          </div>
+
+          <style>
+            /* Remove spinners from number input */
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+              -webkit-appearance: none; 
+              margin: 0; 
+            }
+          </style>
+          <div class="loader-bar" id="progressBar"></div>
+        </section>
+
+        <!-- Pipeline Workflow -->
+        <section id="pipeline" class="agent-pipeline glass-card">
+          <div class="section-header">
+            <h2 style="font-size: 1.5rem; font-weight: 800;">Processing Pipeline</h2>
+            <span class="badge" style="background: rgba(129, 140, 248, 0.2); color: var(--primary);">Agentic Logic Active</span>
+          </div>
+          <div class="steps-list">
+            <div id="step-1" class="step-item">
+              <div class="step-icon"><i data-lucide="scan-eye"></i></div>
+              <div class="step-content">
+                <div class="step-title">Linguistic Extraction</div>
+                <div class="step-desc">Identifying core entities and semantic axioms.</div>
+              </div>
+            </div>
+            <div id="step-2" class="step-item">
+              <div class="step-icon"><i data-lucide="network"></i></div>
+              <div class="step-content">
+                <div class="step-title">Neural Mapping</div>
+                <div class="step-desc">Structuring concepts into hierarchical relationships.</div>
+              </div>
+            </div>
+            <div id="step-3" class="step-item">
+              <div class="step-icon"><i data-lucide="brain-circuit"></i></div>
+              <div class="step-content">
+                <div class="step-title">Generative Synthesis</div>
+                <div class="step-desc">Encoding knowledge into unique assessment variants.</div>
+              </div>
+            </div>
+            <div id="step-4" class="step-item">
+              <div class="step-icon"><i data-lucide="bar-chart-big"></i></div>
+              <div class="step-content">
+                <div class="step-title">Taxonomy Categorization</div>
+                <div class="step-desc">Assigning Bloom's difficulty levels.</div>
+              </div>
+            </div>
+            <div id="step-5" class="step-item">
+              <div class="step-icon"><i data-lucide="shield-check"></i></div>
+              <div class="step-content">
+                <div class="step-title">Verification Loop</div>
+                <div class="step-desc">Self-validating factual consistency.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Results Display -->
+        <section id="results">
+          <div class="results-grid">
+            <aside class="results-left">
+              <div class="section-header">
+                <h2 style="font-weight: 800; color: #fff;">Extracted Hierarchy</h2>
+              </div>
+              <div id="conceptsTree" class="concepts-tree">
+                <!-- Concepts injected here -->
+              </div>
+            </aside>
+            <div class="results-right">
+              <div class="section-header">
+                <h2 style="font-weight: 800; color: #fff;">Quantum-Generated Quiz</h2>
+                <span id="quizCountBadge" class="badge" style="background: rgba(16, 185, 129, 0.2); color: var(--success);">Validated Questions</span>
+              </div>
+              <div class="quiz-list-wrapper">
+                  <div id="quizList" class="quiz-list">
+                    <!-- Quiz cards injected here -->
+                  </div>
+              </div>
+              <div id="submitContainer" class="submit-container" style="margin-top: 4rem;">
+                <button class="btn-chrome" style="width: 100%; border-radius: 20px;" onclick="submitQuiz()">
+                  <i data-lucide="check-circle"></i>
+                  Finalize and Evaluate
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="footer-divider"></div>
+        <p>
+          &copy; 2026 Triple Edge AI.
+          <span class="footer-tag">Enterprise Knowledge System v4.0.2</span>
+        </p>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
